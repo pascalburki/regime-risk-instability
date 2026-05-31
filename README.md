@@ -1,4 +1,3 @@
-# regime-risk-instability
 # Regime-Based Risk Instability in Financial Markets
 
 ## What this project is
