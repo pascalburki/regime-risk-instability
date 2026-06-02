@@ -10,3 +10,9 @@
 - Most stable asset: [your result]
 - Misalignment test: broken correlation differed by [your number]
 - Script: data_foundation/june1_multi_asset_foundation.py
+## June 2 2026
+- Tested forward fill vs drop missing on 5-asset dataset
+- Vol changed by ___% between cleaning methods
+- Correlation changed by ___ points between cleaning methods
+- Key finding: data cleaning decisions are not neutral
+- Script: data_foundation/june2_data_sensitivity.py
