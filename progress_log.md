@@ -16,3 +16,12 @@
 - Correlation changed by 0.0339 points between cleaning methods
 - Key finding: data cleaning decisions are not neutral
 - Script: data_foundation/june2_data_sensitivity.py
+## June 3 2026
+- Extended cross-asset comparison with Sharpe, skewness, kurtosis, yearly vol
+- Most volatile: XOM 32.6% annualized
+- Most stable: GLD 14.2% annualized  
+- Key finding: TLT had negative mean return -1.68% annualized over 2018-2023
+- Worst Sharpe: TLT at -0.344
+- Best Sharpe: QQQ at 0.500
+- Data cleaning changed vol by up to 5.5%, correlation by up to 0.034 points
+- Script: core_metrics/june3_cross_asset_behavior.py
