@@ -30,3 +30,10 @@
 - Highest correlation pair: SPY-QQQ (0.9331) — equity assets move together
 - Lowest correlation pair: TLT-XOM (-0.2734) — bonds vs energy diverge
 - Script: core_metrics/june4_correlation_structure.py
+## June 5 2026
+- Defined volatility regimes on SPY: low (bottom 30%), medium, high (top 30%)
+- Low vol threshold: 0.1095 annualized, High vol threshold: 0.1961 annualized
+- Volatility ranges from 0.1095 to 0.1961 across regimes
+- High vol regime mean return: -0.0001, Low vol mean return: 0.0007
+- Key finding: returns are nearly 7x higher in low vol vs high vol regimes
+- Script: regime_analysis/june5_regime_definition.py
