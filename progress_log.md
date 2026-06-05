@@ -5,10 +5,10 @@
 - Ready to start multi-asset system June 1
 ## June 1 2026
 - Built 5-asset data foundation: SPY, QQQ, GLD, TLT, XOM
-- 2018-2023 aligned dataset
-- Most volatile asset: [your result]
-- Most stable asset: [your result]
-- Misalignment test: broken correlation differed by [your number]
+- 2018-2023 aligned dataset, 1509 trading days
+- Most volatile asset: XOM (0.3256 annualized)
+- Most stable asset: GLD (0.1421 annualized)
+- Misalignment test: broken correlation differed by up to 0.0339 points
 - Script: data_foundation/june1_multi_asset_foundation.py
 ## June 2 2026
 - Tested forward fill vs drop missing on 5-asset dataset
@@ -25,3 +25,8 @@
 - Best Sharpe: QQQ at 0.500
 - Data cleaning changed vol by up to 5.5%, correlation by up to 0.034 points
 - Script: core_metrics/june3_cross_asset_behavior.py
+## June 4 2026
+- Added full correlation matrix and highest/lowest pair identification
+- Highest correlation pair: SPY-QQQ (0.9331) — equity assets move together
+- Lowest correlation pair: TLT-XOM (-0.2734) — bonds vs energy diverge
+- Script: core_metrics/june4_correlation_structure.py
