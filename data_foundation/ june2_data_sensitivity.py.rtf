@@ -81,7 +81,6 @@ print("Correlation diff drop:", corr_diff_drop)\
 \
 normalized = combined_raw / combined_raw.iloc[0] * 100\
 \
-plt.figure()\
 plt.plot(normalized)\
 plt.title("Normalized Prices (Base = 100)")\
 plt.xlabel("Date")\
@@ -89,7 +88,6 @@ plt.ylabel("Price Index")\
 plt.legend(normalized.columns)\
 plt.show()\
 \
-plt.figure()\
 plt.plot(log_returns)\
 plt.title("Daily Log Returns")\
 plt.xlabel("Date")\
@@ -97,7 +95,6 @@ plt.ylabel("Log Return")\
 plt.legend(log_returns.columns)\
 plt.show()\
 \
-plt.figure()\
 plt.bar(vols.index, vols.values)\
 plt.title("Annualized Volatility by Asset")\
 plt.xlabel("Asset")\
