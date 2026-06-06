@@ -43,5 +43,5 @@
 - High vol correlation range: -0.3043 to 0.9508
 - Largest increase in stress: QQQ-XOM pair, from 0.1363 to 0.5187 (+0.3824)
 - Largest decrease in stress: QQQ-TLT pair, from -0.0236 to -0.2450 (-0.2215)
-- Key finding: correlations rise sharply in high vol — diversification breaks down when you need it most
+- Key finding: correlations rise sharply in high vol causing diversification to break down when you need it most
 - Script: regime_analysis/june6_correlation_by_regime.py
