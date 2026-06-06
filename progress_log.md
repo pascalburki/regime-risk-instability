@@ -37,3 +37,11 @@
 - High vol regime mean return: -0.0001, Low vol mean return: 0.0007
 - Key finding: returns are nearly 7x higher in low vol vs high vol regimes
 - Script: regime_analysis/june5_regime_definition.py
+## June 6 2026
+- Computed correlation matrix by volatility regime
+- Low vol correlation range: -0.2784 to 0.8526
+- High vol correlation range: -0.3043 to 0.9508
+- Largest increase in stress: QQQ-XOM pair, from 0.1363 to 0.5187 (+0.3824)
+- Largest decrease in stress: QQQ-TLT pair, from -0.0236 to -0.2450 (-0.2215)
+- Key finding: correlations rise sharply in high vol — diversification breaks down when you need it most
+- Script: regime_analysis/june6_correlation_by_regime.py
