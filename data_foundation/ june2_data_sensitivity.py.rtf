@@ -3,7 +3,7 @@ import pandas as pd
 import yfinance as yf
 import matplotlib.pyplot as plt
  
-# --- setup (same as june1) ---
+# setup (same as june1)
 dfSPY = yf.download('SPY', '2018-01-01', '2023-12-31')
 dfQQQ = yf.download('QQQ', '2018-01-01', '2023-12-31')
 dfGLD = yf.download('GLD', '2018-01-01', '2023-12-31')
@@ -19,12 +19,12 @@ XOM = dfXOM["Close"]
 combined = pd.concat([SPY, QQQ, GLD, TLT, XOM], axis=1)
 combined.columns = ['SPY', 'QQQ', 'GLD', 'TLT', 'XOM']
  
-# --- new: simulate missing data ---
+# new: simulate missing data
 combined_with_gaps = combined.copy()
 drop_idx = combined.sample(frac=0.1, random_state=42).index
 combined_with_gaps.loc[drop_idx] = np.nan
  
-# --- new: three versions ---
+# new: three versions
 combined_raw = combined.dropna()
 log_returns = np.log(combined_raw / combined_raw.shift(1)).dropna()
  
