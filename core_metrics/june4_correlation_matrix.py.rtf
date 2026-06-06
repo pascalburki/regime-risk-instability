@@ -1,126 +1,33 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2867
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\deftab560
-\pard\pardeftab560\slleading20\partightenfactor0
-
-\f0\fs26 \cf0 import numpy as np\
-import pandas as pd\
-import yfinance as yf\
-import matplotlib.pyplot as plt\
-\
-dfSPY = yf.download('SPY', '2018-01-01', '2023-12-31')\
-dfQQQ = yf.download('QQQ', '2018-01-01', '2023-12-31')\
-dfGLD = yf.download('GLD', '2018-01-01', '2023-12-31')\
-dfTLT = yf.download('TLT', '2018-01-01', '2023-12-31')\
-dfXOM = yf.download('XOM', '2018-01-01', '2023-12-31')\
-\
-SPY = dfSPY["Close"]\
-QQQ = dfQQQ["Close"]\
-GLD = dfGLD["Close"]\
-TLT = dfTLT["Close"]\
-XOM = dfXOM["Close"]\
-\
-combined = pd.concat([SPY, QQQ, GLD, TLT, XOM], axis=1)\
-combined.columns = ['SPY', 'QQQ', 'GLD', 'TLT', 'XOM']\
-print("shape before:", combined.shape)\
-\
-combined_with_gaps = combined.copy()\
-drop_idx = combined.sample(frac=0.1, random_state=42).index\
-combined_with_gaps.loc[drop_idx] = np.nan\
-\
-print("shape after:", combined_with_gaps.shape)\
-\
-combined_raw = combined.dropna()\
-log_returns = np.log(combined_raw / combined_raw.shift(1)).dropna()\
-\
-combined_ffill = combined_with_gaps.ffill()\
-log_returns_ffill = np.log(combined_ffill / combined_ffill.shift(1)).dropna()\
-\
-combined_drop = combined_with_gaps.dropna()\
-log_returns_drop = np.log(combined_drop / combined_drop.shift(1)).dropna()\
-\
-assets = ['SPY', 'QQQ', 'GLD', 'TLT', 'XOM']\
-years = ['2018', '2019', '2020', '2021', '2022', '2023']\
-\
-for asset in assets:\
-    r = log_returns[asset]\
-    print(f"\{asset\}")\
-    print(f"mean: \{round(r.mean(),4)\}, std: \{round(r.std(),4)\}, annual vol: \{round(r.std()*np.sqrt(252),4)\}, skew: \{round(r.skew(),4)\}, kurt: \{round(r.kurt(),4)\}")\
-    for year in years:\
-        yr = r.loc[year]\
-        print(f"\{year\} annual vol: \{round(yr.std()*np.sqrt(252),4)\}")\
-\
-\
-vols = log_returns.std() * np.sqrt(252)\
-means = log_returns.mean() * 252\
-summary = pd.DataFrame(\{"Mean": means, "Volatility": vols\})\
-print("TABLE:", summary)\
-\
-corr_raw = log_returns.corr()\
-vol_raw = log_returns.std() * np.sqrt(252)\
-\
-corr_ffill = log_returns_ffill.corr()\
-corr_drop = log_returns_drop.corr()\
-\
-vol_ffill = log_returns_ffill.std() * np.sqrt(252)\
-vol_drop = log_returns_drop.std() * np.sqrt(252)\
-\
-corr_diff_ffill = (corr_ffill - corr_raw).round(4)\
-corr_diff_drop = (corr_drop - corr_raw).round(4)\
-\
-vol_change_ffill = ((vol_ffill - vol_raw) / vol_raw * 100).round(4)\
-vol_change_drop = ((vol_drop - vol_raw) / vol_raw * 100).round(4)\
-\
-print("Vol change ffill vs raw:", vol_change_ffill)\
-print("Vol change drop vs raw:", vol_change_drop)\
-print("Correlation diff ffill:", corr_diff_ffill)\
-print("Correlation diff drop:", corr_diff_drop)\
-\
-normalized = combined_raw / combined_raw.iloc[0] * 100\
-\
-rf = 0.04\
-for asset in assets:\
-    r = log_returns[asset]\
-    ann_mean = r.mean() * 252\
-    ann_vol = r.std() * np.sqrt(252)\
-    sharpe = (ann_mean - rf) / ann_vol\
-    best_year = max(years, key=lambda y: log_returns[asset].loc[y].mean())\
-    worst_year = min(years, key=lambda y: log_returns[asset].loc[y].mean())\
-    print(f"\{asset\}: mean=\{round(ann_mean,4)\}, vol=\{round(ann_vol,4)\}, sharpe=\{round(sharpe,4)\}, skew=\{round(r.skew(),4)\}, kurt=\{round(r.kurt(),4)\}, best=\{best_year\}, worst=\{worst_year\}")\
-\
-corr_matrix = log_returns.corr()\
-print(corr_matrix.round(4))\
-\
-corr_unstacked = corr_matrix.unstack()\
-corr_unstacked = corr_unstacked[corr_unstacked < 1.0]\
-highest_pair = corr_unstacked.idxmax()\
-lowest_pair = corr_unstacked.idxmin()\
-print("Highest correlation pair: ", highest_pair, round(corr_unstacked.max(), 4))\
-print("Lowest correlation pair: ", lowest_pair, round(corr_unstacked.min(), 4))\
-\
-plt.figure()\
-plt.plot(normalized)\
-plt.title("Normalized Prices (Base = 100)")\
-plt.xlabel("Date")\
-plt.ylabel("Price Index")\
-plt.legend(normalized.columns)\
-plt.show()\
-\
-plt.figure()\
-plt.plot(log_returns)\
-plt.title("Daily Log Returns")\
-plt.xlabel("Date")\
-plt.ylabel("Log Return")\
-plt.legend(log_returns.columns)\
-plt.show()\
-\
-plt.figure()\
-plt.bar(vols.index, vols.values)\
-plt.title("Annualized Volatility by Asset")\
-plt.xlabel("Asset")\
-plt.ylabel("Volatility")\
-plt.show()\
-}
+import numpy as np
+import pandas as pd
+import yfinance as yf
+import matplotlib.pyplot as plt
+ 
+# setup (same as june1)
+dfSPY = yf.download('SPY', '2018-01-01', '2023-12-31')
+dfQQQ = yf.download('QQQ', '2018-01-01', '2023-12-31')
+dfGLD = yf.download('GLD', '2018-01-01', '2023-12-31')
+dfTLT = yf.download('TLT', '2018-01-01', '2023-12-31')
+dfXOM = yf.download('XOM', '2018-01-01', '2023-12-31')
+ 
+SPY = dfSPY["Close"]
+QQQ = dfQQQ["Close"]
+GLD = dfGLD["Close"]
+TLT = dfTLT["Close"]
+XOM = dfXOM["Close"]
+ 
+combined = pd.concat([SPY, QQQ, GLD, TLT, XOM], axis=1)
+combined.columns = ['SPY', 'QQQ', 'GLD', 'TLT', 'XOM']
+combined_raw = combined.dropna()
+log_returns = np.log(combined_raw / combined_raw.shift(1)).dropna()
+ 
+# new: full correlation matrix + highest/lowest pair
+corr_matrix = log_returns.corr()
+print(corr_matrix.round(4))
+ 
+corr_unstacked = corr_matrix.unstack()
+corr_unstacked = corr_unstacked[corr_unstacked < 1.0]
+highest_pair = corr_unstacked.idxmax()
+lowest_pair = corr_unstacked.idxmin()
+print("Highest correlation pair: ", highest_pair, round(corr_unstacked.max(), 4))
+print("Lowest correlation pair: ", lowest_pair, round(corr_unstacked.min(), 4))
