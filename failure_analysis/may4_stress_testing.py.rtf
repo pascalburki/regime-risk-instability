@@ -1,75 +1,109 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2867
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 .AppleSystemUIFontMonospaced-Regular;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\deftab560
-\pard\pardeftab560\slleading20\pardirnatural\partightenfactor0
-
-\f0\fs24 \cf0 import numpy as np\
-\pard\pardeftab560\slleading20\partightenfactor0
-\cf0 import pandas as pd\
-import yfinance as yf\
-import matplotlib.pyplot as plt\
-\
-df_jpm = yf.download('JPM', '2018-01-01', '2023-12-31')\
-df_xom = yf.download('XOM', '2018-01-01', '2023-12-31')\
-\
-close_jpm = df_jpm["Close"]\
-close_xom = df_xom["Close"]\
-\
-full_range = pd.date_range(start='2018-01-10', end='2023-12-31', freq='B')\
-\
-close_combined = pd.concat([close_jpm, close_xom], axis=1)\
-close_combined.columns = ['JPM', 'XOM']\
-\
-log_returns = np.log(close_combined/close_combined.shift(1)).dropna()\
-\
-mean_jpm = log_returns['JPM'].mean()\
-mean_xom = log_returns['XOM'].mean()\
-std_jpm = log_returns['JPM'].std()\
-std_xom = log_returns['XOM'].std()\
-\
-def portfolio_vol_at_corr(corr, w1=0.5, w2=0.5, s1=std_jpm, s2=std_xom):\
-  cov = corr * s1 * s2\
-  portfolio_variance = w1**2 * s1**2 + w2**2 * s2**2 + 2 * w1 * w2 * cov\
-  return np.sqrt(portfolio_variance) * np.sqrt(252)\
-\
-correlations = np.linspace(-1, 1, 200)\
-port_vols_at_corr = [portfolio_vol_at_corr(c) for c in correlations]\
-weighted_avg = 0.5 * std_jpm * np.sqrt(252) + 0.5 * std_xom * np.sqrt(252)\
-div_benefits = [weighted_avg - v for v in port_vols_at_corr]\
-\
-key_corrs = [-1.0, -0.5, 0.0, 0.49, 0.5, 0.7, 0.8, 0.9, 0.95, 0.99, 1.0]\
-for c in key_corrs:\
-  vol = portfolio_vol_at_corr(c)\
-  benefit = weighted_avg - vol\
-  print(f"Correlation: \{c\}, Portfolio Vol: \{round(vol,4)\}, Diversification Benefit: \{round(benefit,4)\}")\
-\
-real_benefit = weighted_avg - portfolio_vol_at_corr(0.49)\
-for c in correlations:\
-  benefit = weighted_avg - portfolio_vol_at_corr(c)\
-  if benefit <= real_benefit:\
-    print("benefit drops by 50% at correlation: ", c)\
-    break\
-\
-vol_multipliers = [1.0, 1.5, 2.0, 2.5, 3.0]\
-for mult in vol_multipliers:\
-  s1_stressed = std_jpm * mult\
-  s2_stressed = std_xom * mult\
-  portfolio_stressed = portfolio_vol_at_corr(0.49, s1=s1_stressed, s2=s2_stressed)\
-  weighted_stressed = 0.5 * s1_stressed * np.sqrt(252) + 0.5 * s2_stressed * np.sqrt(252)\
-  benefit_stressed = weighted_avg - portfolio_stressed\
-  print(f"Vol multiplier: \{mult\}, Portfolio Vol: \{round(portfolio_stressed,4)\}, Benefit: \{round(benefit_stressed,4)\}")\
-\
-stress_corrs = [0.49, 0.7, 0.85, 0.95, 1.0]\
-stress_vol_mult = 3.0\
-print("Simultaneous stress test \'97 vol at 3x normal:")\
-for c in stress_corrs:\
-    s1_s = std_jpm * stress_vol_mult\
-    s2_s = std_xom * stress_vol_mult\
-    port_vol = portfolio_vol_at_corr(c, s1=s1_s, s2=s2_s)\
-    weighted_s = 0.5 * s1_s * np.sqrt(252) + 0.5 * s2_s * np.sqrt(252)\
-    benefit = weighted_s - port_vol\
-    print(f"Corr: \{c\}, Portfolio Vol: \{round(port_vol,4)\}, Benefit: \{round(benefit,4)\}")\
-}
+import numpy as np
+import pandas as pd
+import yfinance as yf
+import matplotlib.pyplot as plt
+ 
+# section 1: data loading
+df_jpm = yf.download('JPM', '2018-01-01', '2023-12-31')
+df_xom = yf.download('XOM', '2018-01-01', '2023-12-31')
+ 
+close_jpm = df_jpm["Close"]
+close_xom = df_xom["Close"]
+ 
+close_combined = pd.concat([close_jpm, close_xom], axis=1).dropna()
+close_combined.columns = ['JPM', 'XOM']
+ 
+print('stats: ')
+print("heads: ", close_combined.head(5))
+print("tails: ", close_combined.tail(5))
+print("shape: ", close_combined.shape)
+ 
+# section 2: returns
+log_returns = np.log(close_combined/close_combined.shift(1)).dropna()
+mean_jpm = log_returns['JPM'].mean()
+std_jpm = log_returns['JPM'].std()
+mean_xom = log_returns['XOM'].mean()
+std_xom = log_returns['XOM'].std()
+ 
+beyond_2std_jpm = ((np.abs(log_returns['JPM']) > 2 * log_returns['JPM'].std()).sum()/len(log_returns['JPM']))*100
+beyond_3std_jpm = ((np.abs(log_returns['JPM']) > 3 * log_returns['JPM'].std()).sum()/len(log_returns['JPM']))*100
+beyond_2std_xom = ((np.abs(log_returns['XOM']) > 2 * log_returns['XOM'].std()).sum()/len(log_returns['XOM']))*100
+beyond_3std_xom = ((np.abs(log_returns['XOM']) > 3 * log_returns['XOM'].std()).sum()/len(log_returns['XOM']))*100
+ 
+years = ['2018', '2019', '2020', '2021', '2022', '2023']
+ 
+print("JPM stats")
+print("mean: ", log_returns['JPM'].mean(), "std: ", log_returns['JPM'].std(), "skewness: ", log_returns['JPM'].skew(), "kurtosis: ", log_returns['JPM'].kurt(), "beyond 2 std: ", beyond_2std_jpm, "beyond 3 std: ", beyond_3std_jpm)
+print("XOM stats")
+print("mean: ", log_returns['XOM'].mean(), "std: ", log_returns['XOM'].std(), "skewness: ", log_returns['XOM'].skew(), "kurtosis: ", log_returns['XOM'].kurt(), "beyond 2 std: ", beyond_2std_xom, "beyond 3 std: ", beyond_3std_xom)
+ 
+for year in years:
+    r = log_returns.loc[year]
+    print(f"JPM: {year} mean: {r['JPM'].mean()} std: {r['JPM'].std()} correlation: {r['JPM'].corr(r['XOM'])}")
+    print(f"XOM: {year} mean: {r['XOM'].mean()} std: {r['XOM'].std()} correlation: {r['JPM'].corr(r['XOM'])}")
+ 
+# section 3: volatility and correlation
+vol_20 = log_returns.rolling(window=20).std()*np.sqrt(252)
+vol_60 = log_returns.rolling(window=60).std()*np.sqrt(252)
+corr_20 = log_returns['JPM'].rolling(window=20).corr(log_returns['XOM'])
+corr_60 = log_returns['JPM'].rolling(window=60).corr(log_returns['XOM'])
+corr = log_returns['JPM'].corr(log_returns['XOM'])
+cov_matrix = log_returns.cov()
+ 
+port_variance = 0.5**2 * std_jpm**2 + 0.5**2 * std_xom**2 + 2*0.5*0.5*std_jpm*std_xom*corr
+port_vol = np.sqrt(port_variance) * np.sqrt(252)
+weighted_avg = 0.5 * std_jpm * np.sqrt(252) + 0.5 * std_xom * np.sqrt(252)
+ 
+weights = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+port_means = []
+port_vols = []
+port_sharpes = []
+rf = 0.04
+ 
+for w in weights:
+    port_ret = w * log_returns['JPM'] + (1-w) * log_returns['XOM']
+    ann_mean = port_ret.mean() * 252
+    ann_vol = port_ret.std() * np.sqrt(252)
+    sharpe = (ann_mean - rf)/ann_vol
+    port_means.append(ann_mean)
+    port_vols.append(ann_vol)
+    port_sharpes.append(sharpe)
+ 
+print("covariance matrix: ", cov_matrix)
+print("portfolio variance: ", port_variance)
+print("diversification benefit: ", weighted_avg - port_vol)
+ 
+for i, w in enumerate(weights):
+    print(f"JPM: {w}, XOM: {1-w}, volatility: {port_vols[i]}, sharpe: {port_sharpes[i]}")
+ 
+# section 4: visualization
+plt.plot(close_jpm, color='green', label='JPM')
+plt.plot(close_xom, color='blue', label='XOM')
+plt.title('price chart')
+plt.xlabel('date')
+plt.ylabel('close price')
+plt.show()
+ 
+plt.plot(log_returns['JPM'], label='JPM', color='blue')
+plt.plot(log_returns['XOM'], label='XOM', color='green')
+plt.title('returns chart')
+plt.xlabel('date')
+plt.ylabel('returns')
+plt.legend()
+plt.show()
+ 
+plt.plot(vol_20['JPM'], color='green', label='20 day window log vol')
+plt.plot(vol_20['XOM'], color='blue', label='60 day window log vol')
+plt.title('rolling volatility chart')
+plt.xlabel('date')
+plt.ylabel('volatility')
+plt.legend()
+plt.show()
+ 
+plt.plot(corr_20, color='green', label='20 day window corr')
+plt.plot(corr_60, color='blue', label='60 day window corr')
+plt.title('rolling correlation chart')
+plt.xlabel('date')
+plt.ylabel('correlation')
+plt.legend()
+plt.show()
