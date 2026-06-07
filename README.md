@@ -1,8 +1,8 @@
 # Regime-Based Risk Instability in Financial Markets
 
 ## What this project is
-A system that analyzes how financial relationships — returns, volatility, 
-and correlation — change across market regimes, and when diversification 
+A system that analyzes how financial relationships (returns, volatility, 
+and correlation) change across market regimes, and when diversification 
 breaks under stress.
 
 ## Current status
@@ -26,3 +26,8 @@ JPM, XOM, GS, AAPL, MSFT, NVDA, TSLA, SPY
 - Layer 3: Regime system (June 2026)
 - Layer 4: Failure and instability analysis (July 2026)
 - Layer 5: Final write-up and visualization (August 2026)
+
+## findings so far
+SPY's mean daily return went from 0.0007 in low vol periods to -0.0001 in high vol periods. High vol doesn't just mean more risk, it also means lower or negative returns on average.
+QQQ and XOM had a correlation of 0.1363 in low vol and jumped to 0.5187 in high vol. Assets that look unrelated in calm markets become correlated during stress, which means diversification breaks down exactly when you need it most.
+QQQ and TLT correlation went from -0.0236 in low vol to -0.2450 in high vol. During a crisis investors sell stocks and move into bonds so the two assets move more strongly in opposite directions. This is called flight to safety.
