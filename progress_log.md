@@ -46,9 +46,10 @@
 - Key finding: correlations rise sharply in high vol causing diversification to break down when you need it most
 - Script: regime_analysis/june6_correlation_by_regime.py
 ## June 8 2026
-- Built equal weight portfolio across 5 assets
-- Diversification benefit in low vol: 1.09%
-- Diversification benefit in high vol: 54.71%
-- Key finding: diversification benefit is dramatically higher in high vol regimes
-- This contradicts the simple prediction but makes sense when TLT is included
+- Built equal weight portfolio across 5 assets: SPY QQQ GLD TLT XOM
+- Diversification benefit in low vol: 44.6%
+- Diversification benefit in high vol: 33.0%
+- Benefit reduction under stress: 26%
+- Key finding: TLT's negative correlation drives large overall benefit
+- But benefit still shrinks under stress confirming correlation clustering
 - Script: regime_analysis/june8_portfolio_regimes.py
