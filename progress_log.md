@@ -45,3 +45,10 @@
 - Largest decrease in stress: QQQ-TLT pair, from -0.0236 to -0.2450 (-0.2215)
 - Key finding: correlations rise sharply in high vol causing diversification to break down when you need it most
 - Script: regime_analysis/june6_correlation_by_regime.py
+## June 8 2026
+- Built equal weight portfolio across 5 assets
+- Diversification benefit in low vol: 1.09%
+- Diversification benefit in high vol: 54.71%
+- Key finding: diversification benefit is dramatically higher in high vol regimes
+- This contradicts the simple prediction but makes sense when TLT is included
+- Script: regime_analysis/june8_portfolio_regimes.py
