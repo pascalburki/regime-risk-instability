@@ -56,3 +56,10 @@
 - Key finding: TLT's negative correlation drives large overall benefit
 - But benefit still shrinks under stress confirming correlation clustering
 - Script: regime_analysis/june8_portfolio_regimes.py
+## June 9 2026
+- Measured individual asset vol vs portfolio vol by regime
+- Biggest diversification contributor: XOM (gap of 0.1461 in low vol, 0.2453 in high vol)
+- Benefit with all 5 assets: 44.6% low vol, 33.0% high vol
+- Benefit without TLT: 33.87% low vol, 19.5% high vol
+- TLT adds ~11% diversification benefit in low vol and ~13.5% in high vol
+- Script: regime_analysis/june9_diversification_benefit.py
