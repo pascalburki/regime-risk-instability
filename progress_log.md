@@ -63,3 +63,8 @@
 - Benefit without TLT: 33.87% low vol, 19.5% high vol
 - TLT adds ~11% diversification benefit in low vol and ~13.5% in high vol
 - Script: regime_analysis/june9_diversification_benefit.py
+## June 10 2026
+- Tested diversification benefit across uniform correlation 0 to 1
+- Benefit drops below 20% at correlation = 0.545
+- Real portfolio benefit: 33-44% depending on regime
+- Script: failure_analysis/june11_correlation_threshold.py
