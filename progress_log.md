@@ -68,3 +68,8 @@
 - Benefit drops below 20% at correlation = 0.545
 - Real portfolio benefit: 33-44% depending on regime
 - Script: failure_analysis/june11_correlation_threshold.py
+## June 12 2026
+- Tested portfolio vol across volatility multipliers 1x to 5x
+- Portfolio vol exceeds 50% at multiplier = 3.83
+- Corresponds to SPY vol of 78.36% annualized
+- Script: failure_analysis/june12_volatility_threshold.py
