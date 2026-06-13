@@ -78,3 +78,9 @@
 - Portfolio vol exceeds 50% at multiplier = 3.83
 - Corresponds to SPY vol of 78.36% annualized
 - Script: failure_analysis/june12_volatility_threshold.py
+## June 13 2026
+- Built 2D stress grid: 50x50 correlation x vol multiplier combinations
+- Failure zone (benefit < 5%): corr > 0.879 AND vol > 1x
+- Heatmap shows nonlinear collapse in top-right corner
+- Key finding: correlation is the primary failure driver, not volatility
+- Script: failure_analysis/june13_combined_failure_zone.py
