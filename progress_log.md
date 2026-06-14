@@ -84,3 +84,7 @@
 - Heatmap shows nonlinear collapse in top-right corner
 - Key finding: correlation is the primary failure driver, not volatility
 - Script: failure_analysis/june13_combined_failure_zone.py
+## June 14 2026
+Updated README with core finding and failure conditions
+Running robustness check on 2010 to 2017 period
+Checking if correlation still increases in stress, diversification benefit still drops, and TLT still acts as negative correlator
