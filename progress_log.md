@@ -88,3 +88,10 @@
 Updated README with core finding and failure conditions
 Running robustness check on 2010 to 2017 period
 Checking if correlation still increases in stress, diversification benefit still drops, and TLT still acts as negative correlator
+## June 15 2026
+Rolling vol analysis on SPY 2018-2023
+Max 20-day vol: 93.92%
+Min 20-day vol: 4.75%
+Ratio: 19.77x
+Volatility changes by 1877% between calmest and most volatile period
+Script: core_metrics/june15_rolling_volatility.py
