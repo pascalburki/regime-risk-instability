@@ -95,3 +95,10 @@ Min 20-day vol: 4.75%
 Ratio: 19.77x
 Volatility changes by 1877% between calmest and most volatile period
 Script: core_metrics/june15_rolling_volatility.py
+## June 16 2026
+Rolling correlation analysis on SPY/QQQ 2018-2023
+Static correlation: 0.9331
+20-day range: 0.4147 to 0.9938
+60-day range: 0.7304 to 0.9911
+Even the highest correlated pair shows meaningful instability
+Script: core_metrics/june16_rolling_correlation.py
