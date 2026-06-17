@@ -102,3 +102,12 @@ Static correlation: 0.9331
 60-day range: 0.7304 to 0.9911
 Even the highest correlated pair shows meaningful instability
 Script: core_metrics/june16_rolling_correlation.py
+## June 17 2026
+Compared 10, 50, 100 day rolling correlation windows for SPY/QQQ during COVID
+10-day mean: 0.965, min: 0.713 (anomaly day)
+50-day mean: 0.974, min: 0.937
+100-day mean: 0.971, min: 0.935
+Conclusion does not change meaningfully across windows for this pair
+Key variation: window sensitivity matters more for volatility than for correlation 
+for already highly correlated assets
+Script: core_metrics/june17_window_sensitivity.py
