@@ -111,3 +111,9 @@ Conclusion does not change meaningfully across windows for this pair
 Key variation: window sensitivity matters more for volatility than for correlation 
 for already highly correlated assets
 Script: core_metrics/june17_window_sensitivity.py
+## June 18 2026
+Refined regime definition using composite vol (10/20/60 day average) + persistence filter
+Days reclassified vs original: 142
+Diversification benefit with refined regimes: low vol 42.77%, high vol 33.63%
+Compared to original: low vol 44.6%, high vol 33.0%
+Script: regime_analysis/june18_regime_refinement.py
