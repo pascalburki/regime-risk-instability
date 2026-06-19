@@ -117,3 +117,9 @@ Days reclassified vs original: 142
 Diversification benefit with refined regimes: low vol 42.77%, high vol 33.63%
 Compared to original: low vol 44.6%, high vol 33.0%
 Script: regime_analysis/june18_regime_refinement.py
+## June 19 2026
+Added return and Sharpe analysis by regime to portfolio
+Low vol: return=0.0482, sharpe=0.0982, benefit=44.6%
+High vol: return=0.0311, sharpe=-0.0441, benefit=33.0%
+Conclusion: ___
+Script: regime_analysis/june19_portfolio_regime_comparison.py
