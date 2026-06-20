@@ -123,3 +123,12 @@ Low vol: return=0.0482, sharpe=0.0982, benefit=44.6%
 High vol: return=0.0311, sharpe=-0.0441, benefit=33.0%
 Conclusion: ___
 Script: regime_analysis/june19_portfolio_regime_comparison.py
+## June 20 2026
+Searched for counterexamples to the core diversification finding
+Counterexample 1 (high vol, diversification worked): 2020-04-16, ratio 0.0013
+QQQ rose 1.81% while XOM fell 3.34%, opposite moves caused near complete cancellation
+Counterexample 2 (low vol, diversification failed): 2018-05-22, ratio 1.0
+All 5 assets including TLT moved down together, no cancellation occurred
+This strengthens the project by showing the regime classification is probabilistic, 
+not deterministic, individual days can contradict the regime average in both directions
+Script: failure_analysis/june20_contradiction_hunt.py
