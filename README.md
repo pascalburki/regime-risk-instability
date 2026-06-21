@@ -37,3 +37,22 @@ This system shows that diversification in a 5 asset portfolio is regime dependen
 
 ## Failure Conditions
 Diversification benefit drops below 20% when uniform correlation exceeds 0.545. Diversification collapses below 5% when correlation exceeds 0.879. Portfolio requires 3.83x volatility spike to breach 50% annualized vol threshold. Removing TLT nearly halves high vol diversification benefit from 33% to 19.5%.
+
+## Contradictions and Limitations
+
+The regime based finding is probabilistic, not deterministic. Individual 
+days can contradict the regime average in both directions.
+
+On April 16 2020, classified as high vol, diversification still worked 
+extremely well. QQQ rose 1.81% while XOM fell 3.34% that day, and the 
+opposite moves nearly cancelled each other out in the portfolio.
+
+On May 22 2018, classified as low vol, diversification completely failed. 
+All five assets including TLT moved down together that day. Since nothing 
+diverged, nothing cancelled, and the portfolio moved just as much as the 
+individual assets did.
+
+This shows that regime labels describe a tendency across many days, not 
+a guarantee for any single day. A portfolio manager that relies on the regime 
+average alone could still get caught off guard on a specific low vol day 
+where all assets happen to move together.
