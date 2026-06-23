@@ -12,9 +12,9 @@ Foundation complete (April–May 2026). Multi-asset system starting June 2026.
 JPM, XOM, GS, AAPL, MSFT, NVDA, TSLA, SPY
 
 ## Key findings so far
-- Volatility is not constant — ranges from 15% to 93% annualized for the 
+- Volatility is not constant, it ranges from 15% to 93% annualized for the 
   same asset depending on market regime
-- Correlation between assets spikes during crises — JPM/XOM ranged from 
+- Correlation between assets spikes during crises, JPM/XOM ranged from 
   -0.57 to 0.93 across 2018-2023
 - Diversification benefit collapses from 4.31% to 1.19% when correlation 
   hits 0.95 and volatility triples simultaneously
@@ -56,3 +56,13 @@ This shows that regime labels describe a tendency across many days, not
 a guarantee for any single day. A portfolio manager that relies on the regime 
 average alone could still get caught off guard on a specific low vol day 
 where all assets happen to move together.
+
+## Theory vs Reality
+
+Theory assumes correlation stays stable, meaning one fixed number can describe the relationship between two assets. In reality, SPY/QQQ 20 day rolling correlation changed significantly, ranging from 0.41 to 0.99 between 2018 and 2023, a spread of 0.58 on a scale from negative 1 to 1.
+
+Theory suggests diversification consistently reduces risk. In practice, diversification benefits fell from 44.6% during calm market conditions to 33.0% during stressed periods. TLT alone contributed 24% of the low volatility benefit and 41% of the high volatility benefit.
+
+Theory treats volatility as the main source of risk. However, the results show diversification breaks down when correlation rises to 0.879 rather than because volatility itself increases. The failure point appears at a volatility multiplier of 1.0 once correlation becomes high enough.
+
+Theory often assumes market returns follow a normal distribution. The data shows otherwise: SPY experienced events beyond 3 standard deviations on 1.53% of trading days compared to the normal prediction of 0.27%, making extreme outcomes almost six times more common than expected.
