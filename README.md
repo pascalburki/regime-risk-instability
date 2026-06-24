@@ -66,3 +66,6 @@ Theory suggests diversification consistently reduces risk. In practice, diversif
 Theory treats volatility as the main source of risk. However, the results show diversification breaks down when correlation rises to 0.879 rather than because volatility itself increases. The failure point appears at a volatility multiplier of 1.0 once correlation becomes high enough.
 
 Theory often assumes market returns follow a normal distribution. The data shows otherwise: SPY experienced events beyond 3 standard deviations on 1.53% of trading days compared to the normal prediction of 0.27%, making extreme outcomes almost six times more common than expected.
+
+##june 24 core finding
+Diversification fails when correlation spikes towards 1. For example QQQ/XOM went from 0.1363 in calm periods to 0.5187 under stress and SPY/QQQ went from 0.8526 to 0.9508. This happens because one macro factor aligns equity assets while defensive assets like TLT sometimes still move in different directions. It is limited because this conclusion depends on TLT maintaining negative correlation with equities. Removing TLT dropped the high vol diversification benefit from 33% to 19.5%, showing that if bonds stop acting as a hedge the entire system breaks down. This happened in 2022 when rate hikes caused both equities and bonds to fall together.
