@@ -1,75 +1,92 @@
-# Regime-Based Risk Instability in Financial Markets
+# Regime Based Risk Instability in Financial Markets
 
-## What this project is
-A system that analyzes how financial relationships (returns, volatility, 
-and correlation) change across market regimes, and when diversification 
+## What This Project Is
+
+A system that analyzes how financial relationships, returns, volatility, 
+and correlation, change across market regimes and when diversification 
 breaks under stress.
 
-## Current status
-Foundation complete (April–May 2026). Multi-asset system starting June 2026.
+## Assets
 
-## Assets analyzed so far
-JPM, XOM, GS, AAPL, MSFT, NVDA, TSLA, SPY
-
-## Key findings so far
-- Volatility is not constant, it ranges from 15% to 93% annualized for the 
-  same asset depending on market regime
-- Correlation between assets spikes during crises, JPM/XOM ranged from 
-  -0.57 to 0.93 across 2018-2023
-- Diversification benefit collapses from 4.31% to 1.19% when correlation 
-  hits 0.95 and volatility triples simultaneously
-- Static parameters describe no individual subperiod accurately
-
-## Project structure
-- Layer 1: Data foundation (June 2026)
-- Layer 2: Core metrics engine (June 2026)
-- Layer 3: Regime system (June 2026)
-- Layer 4: Failure and instability analysis (July 2026)
-- Layer 5: Final write-up and visualization (August 2026)
-
-## findings so far (week 1)
-SPY's mean daily return went from 0.0007 in low vol periods to -0.0001 in high vol periods. High vol doesn't just mean more risk, it also means lower or negative returns on average.
-QQQ and XOM had a correlation of 0.1363 in low vol and jumped to 0.5187 in high vol. Assets that look unrelated in calm markets become correlated during stress, which means diversification breaks down exactly when you need it most.
-QQQ and TLT correlation went from -0.0236 in low vol to -0.2450 in high vol. During a crisis investors sell stocks and move into bonds so the two assets move more strongly in opposite directions. This is called flight to safety.
+SPY, QQQ, GLD, TLT, XOM across 2018 to 2023.
 
 ## Core Finding
-This system shows that diversification in a 5 asset portfolio is regime dependent. Under normal conditions the equal weight portfolio reduces risk by 44.6% compared to holding individual assets. Under stress conditions this drops to 33.0%. The primary driver of this reduction is not volatility but correlation. Diversification fails when uniform correlation exceeds 0.879. The portfolio's stress resilience depends almost entirely on TLT maintaining negative correlation with equities. Removing TLT drops high vol benefit from 33.0% to 19.5%. This conclusion holds as long as bonds continue to act as a flight to safety asset during equity stress.
 
-## june 24 core finding
-Diversification fails when correlation spikes towards 1. For example QQQ/XOM went from 0.1363 in calm periods to 0.5187 under stress and SPY/QQQ went from 0.8526 to 0.9508. This happens because one macro factor aligns equity assets while defensive assets like TLT sometimes still move in different directions. It is limited because this conclusion depends on TLT maintaining negative correlation with equities. Removing TLT dropped the high vol diversification benefit from 33% to 19.5%, showing that if bonds stop acting as a hedge the entire system breaks down. This happened in 2022 when rate hikes caused both equities and bonds to fall together.
-
-## june 25 core finding
-Diversification only works until correlations start moving together. For this 5 asset portfolio, the breaking point is a correlation of 0.879. Above that level, diversification benefit falls below 5% regardless of volatility. During stress periods, QQQ/XOM correlation increased from 0.1363 to 0.5187, while SPY/QQQ rose from 0.8526 to 0.9508. As correlations increased, diversification benefit dropped from 44.6112% in normal conditions to 33.0041% under stress, a 26.02% decline. The portfolio would need volatility to increase by 3.83x normal levels to exceed 50% portfolio volatility, which implies SPY volatility of 78.4%. That is far above the COVID peak of 33.65%. TLT is the main source of protection in the portfolio. Removing it reduces diversification benefit in the high volatility regime from 33.87% to 19.5%, a 42.42% drop.The portfolio really breaks down when correlation rises above 0.879 and TLT stops acting as a hedge. This is similar to what happened in 2022, when rising interest rates caused stocks and bonds to fall at the same time, removing the portfolio's main source of diversification when it was needed most.
+Diversification only works until correlations start moving together. For 
+this 5 asset portfolio the breaking point is correlation 0.879. Above 
+this level diversification benefit falls below 5% regardless of 
+volatility. During stress periods QQQ/XOM correlation jumped from 0.1363 
+to 0.5187 and SPY/QQQ rose from 0.8526 to 0.9508, causing 
+diversification benefit to drop from 44.6% to 33.0%, a 26% decline. 
+Volatility is not the trigger. The failure threshold occurs at vol 
+multiplier 1.0 when correlation is high enough. TLT drives 42% of the 
+high vol benefit. Removing it drops protection from 33% to 19.5%. The 
+system breaks completely when correlation exceeds 0.879 and TLT stops 
+hedging, exactly what happened in 2022 when rate hikes caused stocks and 
+bonds to fall together.
 
 ## Failure Conditions
-Diversification benefit drops below 20% when uniform correlation exceeds 0.545. Diversification collapses below 5% when correlation exceeds 0.879. Portfolio requires 3.83x volatility spike to breach 50% annualized vol threshold. Removing TLT nearly halves high vol diversification benefit from 33% to 19.5%.
 
-## Contradictions and Limitations
-
-The regime based finding is probabilistic, not deterministic. Individual 
-days can contradict the regime average in both directions.
-
-On April 16 2020, classified as high vol, diversification still worked 
-extremely well. QQQ rose 1.81% while XOM fell 3.34% that day, and the 
-opposite moves nearly cancelled each other out in the portfolio.
-
-On May 22 2018, classified as low vol, diversification completely failed. 
-All five assets including TLT moved down together that day. Since nothing 
-diverged, nothing cancelled, and the portfolio moved just as much as the 
-individual assets did.
-
-This shows that regime labels describe a tendency across many days, not 
-a guarantee for any single day. A portfolio manager that relies on the regime 
-average alone could still get caught off guard on a specific low vol day 
-where all assets happen to move together.
+Diversification benefit drops below 20% when uniform correlation exceeds 
+0.545. Diversification collapses below 5% when correlation exceeds 
+0.879. Portfolio requires 3.83x volatility spike to breach 50% 
+annualized vol threshold. Removing TLT nearly halves high vol 
+diversification benefit from 33% to 19.5%.
 
 ## Theory vs Reality
 
-Theory assumes correlation stays stable, meaning one fixed number can describe the relationship between two assets. In reality, SPY/QQQ 20 day rolling correlation changed significantly, ranging from 0.41 to 0.99 between 2018 and 2023, a spread of 0.58 on a scale from negative 1 to 1.
+Theory assumes correlation stays stable. In reality SPY/QQQ 20 day 
+rolling correlation ranged from 0.41 to 0.99 between 2018 and 2023, a 
+swing of 0.58 on a scale from negative 1 to 1.
 
-Theory suggests diversification consistently reduces risk. In practice, diversification benefits fell from 44.6% during calm market conditions to 33.0% during stressed periods. TLT alone contributed 24% of the low volatility benefit and 41% of the high volatility benefit.
+Theory suggests diversification consistently reduces risk. In practice 
+benefit fell from 44.6% in calm periods to 33.0% under stress. TLT 
+alone contributed 24% of low vol benefit and 41% of high vol benefit.
 
-Theory treats volatility as the main source of risk. However, the results show diversification breaks down when correlation rises to 0.879 rather than because volatility itself increases. The failure point appears at a volatility multiplier of 1.0 once correlation becomes high enough.
+Theory treats volatility as the main risk driver. The results show 
+diversification breaks down when correlation hits 0.879, not because 
+volatility increases. The failure threshold appears at vol multiplier 
+1.0 when correlation is already high enough.
 
-Theory often assumes market returns follow a normal distribution. The data shows otherwise: SPY experienced events beyond 3 standard deviations on 1.53% of trading days compared to the normal prediction of 0.27%, making extreme outcomes almost six times more common than expected.
+Theory assumes returns follow a normal distribution. SPY had beyond 3std 
+events on 1.53% of days versus the normal prediction of 0.27%, nearly 
+6x more frequent.
 
+## Contradictions and Limitations
+
+The regime finding is probabilistic not deterministic. Individual days 
+can contradict the regime average in both directions.
+
+On April 16 2020, classified as high vol, diversification still worked 
+extremely well. QQQ rose 1.81% while XOM fell 3.34% and the opposite 
+moves nearly cancelled each other out in the portfolio.
+
+On May 22 2018, classified as low vol, diversification completely 
+failed. All five assets including TLT moved down together. Since nothing 
+diverged nothing cancelled and the portfolio moved just as much as 
+individual assets.
+
+## Three Weaknesses
+
+The 0.879 correlation threshold is based on 2018 to 2023. A different 
+time period could produce a different threshold. Running the system on 
+2000 to 2006 or 2010 to 2016 might show a completely different failure 
+point.
+
+The system depends on TLT maintaining negative correlation with equities. 
+This broke down in 2022 when rate hikes caused stocks and bonds to fall 
+together. If rising rates become the normal environment TLT stops being 
+a hedge and the diversification benefit collapses even in calm periods.
+
+The portfolio uses equal weights, 20% per asset. A minimum variance 
+portfolio with optimized weights might push the 0.879 failure threshold 
+higher. My conclusion could be overly pessimistic because I never tested 
+whether smarter weights extend the system's resilience.
+
+## Project Structure
+
+Layer 1: Data foundation, complete
+Layer 2: Core metrics engine, complete
+Layer 3: Regime system, complete
+Layer 4: Failure and instability analysis, complete
+Layer 5: Final write-up and visualization, August 2026
