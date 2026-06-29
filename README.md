@@ -25,6 +25,8 @@ system breaks completely when correlation exceeds 0.879 and TLT stops
 hedging, exactly what happened in 2022 when rate hikes caused stocks and 
 bonds to fall together.
 
+Diversification works in low vol periods because assets respond to different factors — QQQ responds to tech earnings, XOM responds to oil prices, TLT responds to rate expectations. When no single macro force dominates, these different sensitivities cause assets to move independently and partially cancel each other out. The moment one overwhelming force hits — a pandemic, a rate shock, a financial crisis — all assets respond to that single factor simultaneously and the independence disappears
+
 ## Failure Conditions
 
 Diversification benefit drops below 20% when uniform correlation exceeds 
