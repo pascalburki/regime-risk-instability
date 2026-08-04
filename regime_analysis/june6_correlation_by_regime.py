@@ -3,7 +3,6 @@ import pandas as pd
 import yfinance as yf
 import matplotlib.pyplot as plt
  
-# setup (same as june1)
 dfSPY = yf.download('SPY', '2018-01-01', '2023-12-31')
 dfQQQ = yf.download('QQQ', '2018-01-01', '2023-12-31')
 dfGLD = yf.download('GLD', '2018-01-01', '2023-12-31')
@@ -15,13 +14,11 @@ combined.columns = ['SPY', 'QQQ', 'GLD', 'TLT', 'XOM']
 combined_raw = combined.dropna()
 log_returns = np.log(combined_raw / combined_raw.shift(1)).dropna()
  
-# regime labels from june5
 spy_20 = log_returns['SPY'].rolling(window=20).std() * np.sqrt(252)
 bottom_30 = spy_20.quantile(0.30)
 top_30 = spy_20.quantile(0.70)
 vol_regime = pd.cut(spy_20, bins=[-float('inf'), bottom_30, top_30, float('inf')], labels=['low vol', 'medium vol', 'high vol'])
  
-# new: correlation matrix by regime 
 low_vol_dates = vol_regime[vol_regime == 'low vol'].index
 high_vol_dates = vol_regime[vol_regime == 'high vol'].index
  

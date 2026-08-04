@@ -4,7 +4,6 @@ import pandas as pd
 import yfinance as yf
 import matplotlib.pyplot as plt
  
-# setup (same as june1) 
 dfSPY = yf.download('SPY', '2018-01-01', '2023-12-31')
  
 SPY = dfSPY["Close"]
@@ -20,7 +19,6 @@ combined.columns = ['SPY', 'QQQ', 'GLD', 'TLT', 'XOM']
 combined_raw = combined.dropna()
 log_returns = np.log(combined_raw / combined_raw.shift(1)).dropna()
  
-# new: define volatility regimes on SPY 
 spy_20 = log_returns['SPY'].rolling(window=20).std() * np.sqrt(252)
 bottom_30 = spy_20.quantile(0.30)
 top_30 = spy_20.quantile(0.70)
@@ -36,7 +34,6 @@ returns_high = log_returns['SPY'][vol_regime == 'high vol']
  
 print(f"high vol mean: {round(returns_high.mean(), 4)}, medium vol mean: {round(returns_medium.mean(), 4)}, low vol mean: {round(returns_low.mean(), 4)}")
  
-#  plot: regime bands 
 plt.figure(figsize=(12, 6))
 plt.plot(spy_20, label='rolling vol 20 day window', color='black')
 plt.axhline(top_30, color='blue')

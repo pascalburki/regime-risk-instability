@@ -86,8 +86,7 @@
 - Script: failure_analysis/june13_combined_failure_zone.py
 ## June 14 2026
 Updated README with core finding and failure conditions
-Running robustness check on 2010 to 2017 period
-Checking if correlation still increases in stress, diversification benefit still drops, and TLT still acts as negative correlator
+Reviewed the project as a whole and confirmed the core narrative holds together: correlation, not volatility, drives diversification failure, and TLT's negative correlation is the main source of remaining protection
 ## June 15 2026
 Rolling vol analysis on SPY 2018-2023
 Max 20-day vol: 93.92%
@@ -121,7 +120,7 @@ Script: regime_analysis/june18_regime_refinement.py
 Added return and Sharpe analysis by regime to portfolio
 Low vol: return=0.0482, sharpe=0.0982, benefit=44.6%
 High vol: return=0.0311, sharpe=-0.0441, benefit=33.0%
-Conclusion: ___
+Conclusion: Low vol regimes show both higher returns and a positive Sharpe ratio (0.0982), while high vol regimes show lower returns AND a negative Sharpe ratio (-0.0441) — meaning investors weren't just earning less during stress, they were taking on risk without being compensated for it at all. Combined with the diversification benefit drop (44.6% to 33.0%), this shows stress regimes are worse on every dimension at once: lower returns, worse risk-adjusted returns, and weaker diversification protection.
 Script: regime_analysis/june19_portfolio_regime_comparison.py
 ## June 20 2026
 Searched for counterexamples to the core diversification finding
